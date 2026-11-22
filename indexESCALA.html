@@ -1,0 +1,2120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ee4d2d" />
+  <title>Escala de Processamento • Shopee XPRESS</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ee4d2d'/%3E%3Ctext x='32' y='28' font-family='Arial,sans-serif' font-size='13' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EShopee%3C/text%3E%3Ctext x='32' y='46' font-family='Arial,sans-serif' font-style='italic' font-size='14' font-weight='900' fill='%23ffffff' text-anchor='middle'%3EXPRESS%3C/text%3E%3C/svg%3E" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    .shopee-brand-orange {
+      background-color: #f36a2c;
+    }
+
+    .shopee-header-grad {
+      background: linear-gradient(115deg, #c22b0e 0%, #ee4d2d 42%, #ff7a33 78%, #ffb347 100%);
+    }
+
+    body.theme-light {
+      background-color: #f4f6f9;
+      color: #0f172a;
+    }
+
+    body.theme-light .ui-card {
+      background-color: #ffffff;
+      border-color: #e2e8f0;
+      color: #0f172a;
+      box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
+    }
+
+    body.theme-light .ui-subcard {
+      background-color: #f8fafc;
+      border-color: #e2e8f0;
+      color: #0f172a;
+    }
+
+    body.theme-light .ui-input {
+      background-color: #f8fafc;
+      border-color: #cbd5e1;
+      color: #0f172a;
+    }
+
+    body.theme-light .ui-input:focus {
+      background-color: #ffffff;
+      border-color: #2563eb;
+    }
+
+    body.theme-light .ui-header {
+      background-color: #ffffff;
+      border-color: #e2e8f0;
+    }
+
+    body.theme-light .ui-footer {
+      background-color: rgba(255, 255, 255, 0.96);
+      border-color: #e2e8f0;
+    }
+
+    body.theme-dark {
+      background-color: #090d16;
+      color: #f1f5f9;
+    }
+
+    body.theme-dark .ui-card {
+      background-color: #111827;
+      border-color: #1f2937;
+      color: #f8fafc;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    body.theme-dark .ui-subcard {
+      background-color: #0b1120;
+      border-color: #1e293b;
+      color: #e2e8f0;
+    }
+
+    body.theme-dark .ui-input {
+      background-color: #0b1120;
+      border-color: #334155;
+      color: #f8fafc;
+    }
+
+    body.theme-dark .ui-input:focus {
+      background-color: #090e1a;
+      border-color: #38bdf8;
+    }
+
+    body.theme-dark .ui-header {
+      background-color: #0d1320;
+      border-color: #1e293b;
+    }
+
+    body.theme-dark .ui-footer {
+      background-color: rgba(13, 19, 32, 0.96);
+      border-color: #1e293b;
+    }
+
+    body.theme-dark .text-muted-dynamic {
+      color: #94a3b8;
+    }
+
+    body.theme-light .text-muted-dynamic {
+      color: #64748b;
+    }
+
+    #escalaVisualCard {
+      width: 100%;
+      max-width: 560px;
+      box-sizing: border-box;
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="theme-light antialiased min-h-screen selection:bg-blue-500/20">
+  <div id="app" class="min-h-screen flex flex-col">
+    <!-- HEADER -->
+    <header class="sticky top-0 z-30 ui-header border-b shadow-xs">
+      <div class="shopee-header-grad text-white">
+        <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div id="headerLogoBadge" class="shopee-brand-orange border border-white/40 px-3 py-1.5 rounded-xl shadow-xs flex items-baseline gap-1 select-none shrink-0">
+              <span class="text-white font-normal text-base sm:text-lg tracking-tight">Shopee</span>
+              <span class="text-white font-black italic text-base sm:text-lg tracking-tight">XPRESS</span>
+            </div>
+            <div>
+              <h1 class="text-sm sm:text-lg font-extrabold leading-tight">
+                Escala de Processamento
+              </h1>
+              <p id="headerDateInfo" class="text-[11px] sm:text-xs text-orange-50">
+                Carregando data...
+              </p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="px-3 py-1 rounded-xl bg-blue-950 border-2 border-sky-300 flex items-center gap-1.5 shadow-sm">
+              <span class="text-[10px] uppercase font-black text-sky-300">Volumetria</span>
+              <input
+                id="volumetriaInput"
+                type="text"
+                value="17Mil"
+                class="w-20 bg-blue-600 text-white font-black text-xs sm:text-sm px-2 py-0.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-300 text-center"
+              />
+            </div>
+
+            <div class="px-3 py-1 rounded-xl bg-blue-950 border-2 border-sky-300 flex items-center gap-1.5 shadow-sm">
+              <span class="text-[10px] uppercase font-black text-sky-300">Rotas</span>
+              <input
+                id="rotasInput"
+                type="text"
+                value="185"
+                class="w-16 bg-blue-600 text-white font-black text-xs sm:text-sm px-2 py-0.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-300 text-center"
+              />
+            </div>
+
+            <button
+              id="toggleThemeBtn"
+              type="button"
+              onclick="toggleTheme()"
+              class="px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white border border-blue-300/50 shadow-xs transition flex items-center gap-1.5 cursor-pointer"
+            >
+              <span id="themeIcon">🌙</span>
+              <span id="themeLabel">Versão Dark</span>
+            </button>
+
+            <button
+              type="button"
+              onclick="rodiziarEquipe()"
+              class="px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-[#ee4d2d] hover:bg-orange-50 shadow-xs transition flex items-center gap-1 cursor-pointer"
+            >
+              <span>🔄</span>
+              <span>Rodízio</span>
+            </button>
+
+            <button
+              type="button"
+              onclick="limparEscala()"
+              class="px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-black/20 hover:bg-black/30 text-white border border-white/25 transition cursor-pointer"
+            >
+              Limpar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABAS -->
+      <div class="max-w-[1600px] mx-auto px-4 sm:px-6 flex items-center gap-1 overflow-x-auto">
+        <button
+          id="tab-escala"
+          type="button"
+          onclick="switchTab('escala')"
+          class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold border-b-2 border-[#ee4d2d] text-[#ee4d2d] whitespace-nowrap cursor-pointer"
+        >
+          📋 Montar Escala
+        </button>
+        <button
+          id="tab-equipe"
+          type="button"
+          onclick="switchTab('equipe')"
+          class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 border-transparent text-muted-dynamic whitespace-nowrap cursor-pointer"
+        >
+          👥 Equipe, Folgas & Faltas
+        </button>
+        <button
+          id="tab-historico"
+          type="button"
+          onclick="switchTab('historico')"
+          class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 border-transparent text-muted-dynamic whitespace-nowrap cursor-pointer"
+        >
+          🕒 Histórico (<span id="historicoCount">0</span>)
+        </button>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 py-5 pb-28">
+      <section id="view-escala" class="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+        <div class="xl:col-span-7 space-y-5">
+          <div class="ui-card rounded-2xl p-4 sm:p-5 border-l-4 border-l-blue-600 space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-blue-600 mb-1">
+                  📆 Data da Escala
+                </label>
+                <input
+                  id="dataEscalaInput"
+                  type="date"
+                  class="ui-input w-full text-sm font-bold px-3 py-2 rounded-xl border-2 border-blue-500/40 focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-muted-dynamic mb-1">
+                  Saudação
+                </label>
+                <select
+                  id="saudacaoSelect"
+                  class="ui-input w-full text-sm font-semibold px-3 py-2 rounded-xl border focus:outline-none"
+                >
+                  <option value="Boa noite, pessoal! 🙌🏼">Boa noite, pessoal! 🙌🏼</option>
+                  <option value="Boa tarde, pessoal! 🙌🏼">Boa tarde, pessoal! 🙌🏼</option>
+                  <option value="Bom dia, pessoal! 🙌🏼">Bom dia, pessoal! 🙌🏼</option>
+                </select>
+              </div>
+
+              <div class="flex flex-col justify-between bg-blue-600/10 rounded-xl px-3.5 py-2 border border-blue-500/30">
+                <span class="text-[11px] uppercase font-extrabold text-blue-600">Controle da Equipe</span>
+                <div class="flex items-center justify-between text-xs mt-1">
+                  <span>Escalados: <strong id="totalEscalados" class="text-[#ee4d2d]">0</strong></span>
+                  <span>Ativos: <strong id="totalAtivos" class="text-blue-600">0</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-muted-dynamic mb-1">
+                Recado / Mensagem da Operação
+              </label>
+              <input
+                id="mensagemInput"
+                type="text"
+                class="ui-input w-full text-xs sm:text-sm font-medium px-3 py-2 rounded-xl border focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="ui-card rounded-2xl p-4 border-t-4 border-t-[#ee4d2d]">
+              <div class="flex items-center justify-between mb-3">
+                <h2 class="text-sm font-extrabold">🚚 CARRETAS</h2>
+                <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-blue-600 text-white font-bold">3 vagas</span>
+              </div>
+              <div id="carretasSlots" class="space-y-2"></div>
+            </div>
+
+            <div class="ui-card rounded-2xl p-4 border-t-4 border-t-blue-600">
+              <div class="flex items-center justify-between mb-3">
+                <h2 class="text-sm font-extrabold">🚑 SAMU</h2>
+                <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-blue-600 text-white font-bold">3 vagas</span>
+              </div>
+              <div id="samuSlots" class="space-y-2"></div>
+            </div>
+          </div>
+
+          <div class="ui-card rounded-2xl p-4 sm:p-5">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <h2 class="text-sm font-extrabold flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+                <span>📦 ABASTECIMENTO (Bancada 01 a Bancada 06)</span>
+              </h2>
+              <span class="text-[11px] text-muted-dynamic">Clique na seta ▾ ao lado para abrir a janela rápida</span>
+            </div>
+            <div id="abastecimentoSlots" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+          </div>
+
+          <div class="space-y-3">
+            <h2 class="text-sm font-extrabold uppercase tracking-wider px-1 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+              <span>Bancadas & Sorting</span>
+            </h2>
+            <div id="bancadasContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+          </div>
+
+          <div class="ui-card rounded-2xl p-4 sm:p-5">
+            <h2 class="text-sm font-extrabold mb-3 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+              <span>⚡ APOIO OPERACIONAL</span>
+            </h2>
+            <div id="apoioSlots" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+          </div>
+        </div>
+
+        <!-- PRÉ-VISUALIZAÇÃO -->
+        <div class="xl:col-span-5 xl:sticky xl:top-28 space-y-4">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <span class="text-xs font-extrabold uppercase tracking-wider">
+              Pré-visualização
+            </span>
+            <div class="flex items-center gap-2">
+              <label
+                class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-blue-600 text-white cursor-pointer hover:bg-blue-700 shadow-xs"
+                title="Selecione a imagem da logo Shopee XPRESS para incluir no PNG"
+              >
+                <span>🖼️ Carregar Logo .PNG</span>
+                <input id="customLogoFile" type="file" accept="image/*" class="hidden" />
+              </label>
+
+              <div class="flex rounded-xl ui-card p-1 border">
+                <button
+                  id="modeCardBtn"
+                  type="button"
+                  onclick="setPreviewMode('card')"
+                  class="px-3 py-1 rounded-lg text-xs font-bold bg-[#ee4d2d] text-white cursor-pointer"
+                >
+                  Imagem PNG
+                </button>
+                <button
+                  id="modeTextBtn"
+                  type="button"
+                  onclick="setPreviewMode('text')"
+                  class="px-3 py-1 rounded-lg text-xs font-bold text-muted-dynamic cursor-pointer"
+                >
+                  Texto WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="cardPreviewWrapper" class="flex justify-center w-full">
+            <div id="escalaVisualCard" class="rounded-2xl bg-white text-slate-900 border-2 border-[#ee4d2d] shadow-md overflow-hidden">
+              <div class="shopee-header-grad px-4 py-3 text-white space-y-2">
+                <div class="flex items-start justify-between gap-2">
+                  <div class="min-w-0 flex-1">
+                    <div id="cardLogoContainer" class="inline-flex items-baseline gap-1 shopee-brand-orange border border-white/50 px-3 py-1 rounded-lg">
+                      <span class="text-white font-normal text-base">Shopee</span>
+                      <span class="text-white font-black italic text-base">XPRESS</span>
+                    </div>
+                    <div class="text-base sm:text-lg font-black mt-1 tracking-tight">
+                      ESCALA DE PROCESSAMENTO
+                    </div>
+                    <div id="cardSaudacao" class="text-sm font-bold text-white mt-0.5">
+                      Boa noite, pessoal! 🙌🏼
+                    </div>
+                    <div id="cardMensagem" class="text-xs text-orange-50/95 mt-0.5 break-words leading-snug">
+                      Espero que estejam todos bem. Conto com o compromisso e a parceria de todos para realizarmos uma excelente operação.
+                    </div>
+                  </div>
+
+                  <div class="bg-blue-950 text-white border-2 border-sky-300 rounded-xl px-3.5 py-2 text-center shrink-0 shadow-sm">
+                    <div class="text-xs font-extrabold uppercase text-sky-300">📅 DATA</div>
+                    <div id="cardData" class="text-xl font-black text-white mt-0.5">22/11</div>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="bg-blue-950 border-2 border-sky-300 rounded-xl px-3 py-2 flex items-center justify-between">
+                    <span class="text-xs font-extrabold uppercase text-sky-300">🎯 Volumetria</span>
+                    <span id="cardVolumetria" class="text-base font-black text-white">17Mil</span>
+                  </div>
+                  <div class="bg-blue-950 border-2 border-sky-300 rounded-xl px-3 py-2 flex items-center justify-between">
+                    <span class="text-xs font-extrabold uppercase text-sky-300">🚛 Rotas</span>
+                    <span id="cardRotas" class="text-base font-black text-white">185</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-3 space-y-2.5 bg-white">
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="rounded-xl px-3 py-2 bg-orange-50/80 border border-orange-200">
+                    <div class="text-xs font-black text-[#ee4d2d] mb-0.5">🚚 CARRETAS</div>
+                    <div id="cardCarretas" class="text-sm font-extrabold text-slate-900 break-words leading-snug">-</div>
+                  </div>
+                  <div class="rounded-xl px-3 py-2 bg-blue-50/80 border border-blue-200">
+                    <div class="text-xs font-black text-blue-700 mb-0.5">🚑 SAMU</div>
+                    <div id="cardSamu" class="text-sm font-extrabold text-slate-900 break-words leading-snug">-</div>
+                  </div>
+                </div>
+
+                <div class="rounded-xl p-3 bg-slate-50 border border-slate-200">
+                  <div class="text-xs font-black text-blue-700 mb-2 flex items-center justify-between">
+                    <span>📦 ABASTECIMENTO</span>
+                    <span class="px-2.5 py-0.5 rounded bg-blue-600 text-white text-[11px] font-extrabold">Bancada 01–06</span>
+                  </div>
+                  <div id="cardAbastecimento" class="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-1.5 text-sm text-slate-900"></div>
+                </div>
+
+                <div id="cardBancadas" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5"></div>
+
+                <div id="cardApoio" class="grid grid-cols-3 gap-2 pt-0.5"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="textPreviewWrapper" class="hidden">
+            <textarea
+              id="whatsappTextOutput"
+              rows="24"
+              readonly
+              class="ui-input w-full rounded-2xl p-4 text-xs leading-relaxed border focus:outline-none custom-scroll"
+            ></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 2: EQUIPE, FOLGAS & FALTAS -->
+      <section id="view-equipe" class="hidden space-y-5">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div class="ui-card rounded-2xl p-5 border-l-4 border-l-blue-600">
+            <h2 class="text-base font-extrabold mb-1">Cadastrar Colaborador</h2>
+            <p class="text-xs text-muted-dynamic mb-4">
+              Adicione um nome por vez para aparecer na janela flutuante de seleção.
+            </p>
+            <form id="addMemberForm" class="flex flex-col sm:flex-row gap-3">
+              <input
+                id="newMemberName"
+                type="text"
+                placeholder="Ex.: Lucas Ferreira"
+                class="ui-input flex-1 text-sm px-3.5 py-2.5 rounded-xl border focus:outline-none"
+              />
+              <button
+                type="submit"
+                class="bg-blue-600 hover:bg-blue-700 px-5 py-2.5 rounded-xl text-sm font-extrabold text-white cursor-pointer"
+              >
+                + Adicionar
+              </button>
+            </form>
+          </div>
+
+          <div class="ui-card rounded-2xl p-5 border-l-4 border-l-[#ee4d2d]">
+            <h2 class="text-base font-extrabold mb-1">Importação em Lote</h2>
+            <p class="text-xs text-muted-dynamic mb-3">
+              Cole sua lista de colaboradores (um nome por linha)
+            </p>
+            <form id="bulkMemberForm" class="space-y-3">
+              <textarea
+                id="bulkMemberInput"
+                rows="4"
+                placeholder="Cole sua lista de colaboradores (um nome por linha)&#10;Ex.:&#10;Carlos Eduardo&#10;Rafael Souza&#10;Camila Lima"
+                class="ui-input w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border focus:outline-none custom-scroll"
+              ></textarea>
+              <div class="flex items-center justify-end gap-2">
+                <button
+                  type="button"
+                  onclick="document.getElementById('bulkMemberInput').value = ''"
+                  class="px-3.5 py-2 rounded-xl text-xs font-semibold ui-subcard border cursor-pointer"
+                >
+                  Limpar Campo
+                </button>
+                <button
+                  type="submit"
+                  class="shopee-header-grad px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-white cursor-pointer"
+                >
+                  📥 Importar Lista
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="ui-card rounded-2xl p-5 border">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+            <h3 class="text-sm font-extrabold uppercase tracking-wider text-blue-600">
+              Lista de Colaboradores (<span id="teamTotalCount">0</span>) •
+              <span class="text-emerald-600">Ativos: <span id="teamActiveCount">0</span></span> •
+              <span class="text-amber-600">Folgas: <span id="teamAwayCount">0</span></span> •
+              <span class="text-rose-600">Faltas: <span id="teamAbsentCount">0</span></span>
+            </h3>
+            <span class="text-xs text-muted-dynamic">
+              <strong>Folga</strong> e <strong>Falta</strong> ficam fora do rodízio automático • Use <strong>✏️</strong> para editar o nome
+            </span>
+          </div>
+          <div id="teamListContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+        </div>
+      </section>
+
+      <!-- ABA 3: HISTÓRICO -->
+      <section id="view-historico" class="hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-extrabold">Escalas Salvas</h2>
+            <p class="text-xs text-muted-dynamic">Carregue uma escala anterior quando precisar.</p>
+          </div>
+          <button
+            type="button"
+            onclick="limparHistorico()"
+            class="px-3 py-1.5 rounded-xl text-xs font-semibold ui-card border hover:text-rose-600 cursor-pointer"
+          >
+            Apagar Histórico
+          </button>
+        </div>
+        <div id="historicoContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      </section>
+    </main>
+
+    <!-- JANELA FLUTUANTE -->
+    <div
+      id="floatingPicker"
+      class="hidden fixed z-50 w-64 max-h-72 rounded-2xl ui-card border-2 border-blue-600 shadow-2xl p-2.5 flex flex-col gap-2"
+    >
+      <div class="flex items-center justify-between border-b border-slate-200/30 pb-1.5">
+        <span class="text-[11px] font-black uppercase text-blue-600">Selecionar Nome</span>
+        <button
+          type="button"
+          onclick="closePicker()"
+          class="text-xs font-bold text-muted-dynamic px-1.5 cursor-pointer"
+        >
+          ✕
+        </button>
+      </div>
+
+      <input
+        id="pickerSearch"
+        type="text"
+        placeholder="Buscar nome..."
+        class="ui-input w-full text-xs rounded-lg px-2.5 py-1.5 border focus:outline-none"
+      />
+
+      <div class="flex items-center gap-1.5">
+        <button
+          type="button"
+          onclick="pickValue('Diarista')"
+          class="flex-1 py-1.5 px-2 rounded-lg text-xs font-extrabold bg-blue-600 text-white hover:bg-blue-700 cursor-pointer"
+        >
+          + Diarista
+        </button>
+        <button
+          type="button"
+          onclick="pickValue('')"
+          class="py-1.5 px-2.5 rounded-lg text-xs font-semibold ui-subcard border cursor-pointer"
+        >
+          Limpar
+        </button>
+      </div>
+
+      <div id="pickerOptions" class="overflow-y-auto custom-scroll space-y-1 pr-0.5"></div>
+    </div>
+
+    <!-- MODAL EDITAR COLABORADOR -->
+    <div
+      id="editMemberModal"
+      class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4"
+    >
+      <div class="ui-card w-full max-w-sm rounded-2xl p-5 border-2 border-blue-600 shadow-2xl space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-black uppercase tracking-wider text-blue-600">✏️ Editar Colaborador</h3>
+          <button
+            type="button"
+            onclick="closeEditMemberModal()"
+            class="text-xs font-bold text-muted-dynamic px-2 py-1 cursor-pointer"
+          >
+            ✕
+          </button>
+        </div>
+
+        <form id="editMemberForm" class="space-y-3">
+          <div>
+            <label class="block text-[11px] font-bold uppercase text-muted-dynamic mb-1">Nome</label>
+            <input
+              id="editMemberNameInput"
+              type="text"
+              class="ui-input w-full text-sm font-semibold px-3 py-2 rounded-xl border focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold uppercase text-muted-dynamic mb-1">Status</label>
+            <select
+              id="editMemberStatusSelect"
+              class="ui-input w-full text-sm font-semibold px-3 py-2 rounded-xl border focus:outline-none"
+            >
+              <option value="active">Ativo</option>
+              <option value="away">Folga</option>
+              <option value="absent">Falta</option>
+            </select>
+          </div>
+
+          <div class="flex items-center justify-end gap-2 pt-2">
+            <button
+              type="button"
+              onclick="closeEditMemberModal()"
+              class="px-3.5 py-2 rounded-xl text-xs font-semibold ui-subcard border cursor-pointer"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 rounded-xl text-xs font-extrabold bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
+            >
+              Salvar Alteração
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- BARRA INFERIOR -->
+    <footer class="fixed bottom-0 inset-x-0 z-30 ui-footer backdrop-blur-md border-t shadow-md">
+      <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2.5">
+        <button
+          type="button"
+          onclick="salvarEscalaNoHistorico()"
+          class="px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white transition cursor-pointer"
+        >
+          💾 Salvar Escala
+        </button>
+
+        <div class="flex items-center gap-2 sm:gap-3 flex-1 sm:flex-initial justify-end">
+          <button
+            type="button"
+            onclick="baixarImagemPNG()"
+            class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 transition flex items-center gap-1.5 cursor-pointer"
+          >
+            <span>🖼️</span>
+            <span>Baixar PNG</span>
+          </button>
+
+          <button
+            type="button"
+            onclick="enviarWhatsApp()"
+            class="shopee-header-grad px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white transition flex items-center gap-1.5 cursor-pointer"
+          >
+            <span>📲</span>
+            <span>Copiar / Enviar WhatsApp</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+
+    <!-- TOAST -->
+    <div
+      id="toast"
+      class="fixed top-20 right-4 z-50 hidden px-4 py-2.5 rounded-xl bg-slate-900 text-white border-l-4 border-l-blue-500 shadow-xl text-xs sm:text-sm font-bold"
+    ></div>
+  </div>
+
+  <script>
+    const STORAGE_KEYS = {
+      STATE: 'escala_spx_v14_state',
+      TEAM: 'escala_spx_v14_team',
+      HISTORY: 'escala_spx_v14_history',
+      LAST_ROLES: 'escala_spx_v14_last_roles',
+      THEME: 'escala_spx_v14_theme',
+      LOGO_DATA: 'escala_spx_v14_logo_data'
+    };
+
+    // status: 'active' | 'away' (Folga) | 'absent' (Falta)
+    const DEFAULT_TEAM = [
+      { name: 'Rodrigo', status: 'active' },
+      { name: 'Yan', status: 'active' },
+      { name: 'Edilson', status: 'active' },
+      { name: 'Idacélio', status: 'active' },
+      { name: 'Wellington', status: 'active' },
+      { name: 'Keven', status: 'active' },
+      { name: 'Venâncio', status: 'active' },
+      { name: 'Fábio', status: 'active' },
+      { name: 'Flávio', status: 'active' },
+      { name: 'Claudiana', status: 'active' },
+      { name: 'David', status: 'active' },
+      { name: 'Jordão', status: 'active' },
+      { name: 'Erinaldo', status: 'active' },
+      { name: 'Willian', status: 'active' },
+      { name: 'Edivar', status: 'active' },
+      { name: 'Elikely', status: 'active' },
+      { name: 'Vankelma', status: 'active' },
+      { name: 'Cardoso', status: 'active' },
+      { name: 'Wilton', status: 'active' },
+      { name: 'Ramiro', status: 'active' },
+      { name: 'Regis', status: 'active' },
+      { name: 'Renato', status: 'active' },
+      { name: 'Felipe', status: 'active' },
+      { name: 'Miguel', status: 'active' },
+      { name: 'Alexandre', status: 'active' },
+      { name: 'Ana', status: 'active' },
+      { name: 'Ant. Alexandre', status: 'active' },
+      { name: 'Helio', status: 'active' },
+      { name: 'Berg', status: 'active' }
+    ];
+
+    const ABASTECIMENTO_BANCADAS = ['01', '02', '03', '04', '05', '06'];
+    const BANCADA_NUMBERS = ['02', '03', '04', '05', '06'];
+    const APOIO_ITEMS = [
+      {
+        key: '5s',
+        label: '5S',
+        icon: '🧹',
+        bgClass: 'bg-emerald-50/90',
+        borderClass: 'border-emerald-200',
+        labelClass: 'text-emerald-700',
+        canvasBg: '#ecfdf5',
+        canvasBorder: '#a7f3d0',
+        labelColor: '#047857'
+      },
+      {
+        key: 'volumoso',
+        label: 'VOLUMOSO',
+        icon: '📦',
+        bgClass: 'bg-amber-50/90',
+        borderClass: 'border-amber-200',
+        labelClass: 'text-amber-700',
+        canvasBg: '#fffbeb',
+        canvasBorder: '#fde68a',
+        labelColor: '#b45309'
+      },
+      {
+        key: 'gaiolas',
+        label: 'PUXAR GAIOLAS',
+        icon: '🛒',
+        bgClass: 'bg-sky-50/90',
+        borderClass: 'border-sky-200',
+        labelClass: 'text-sky-700',
+        canvasBg: '#f0f9ff',
+        canvasBorder: '#bae6fd',
+        labelColor: '#0369a1'
+      },
+      {
+        key: 'consertos',
+        label: 'CONCERTOS',
+        icon: '🔧',
+        bgClass: 'bg-slate-100/90',
+        borderClass: 'border-slate-300',
+        labelClass: 'text-slate-700',
+        canvasBg: '#f1f5f9',
+        canvasBorder: '#cbd5e1',
+        labelColor: '#334155'
+      },
+      {
+        key: 'letras',
+        label: 'LETRAS',
+        icon: '🔤',
+        bgClass: 'bg-indigo-50/90',
+        borderClass: 'border-indigo-200',
+        labelClass: 'text-indigo-700',
+        canvasBg: '#eef2ff',
+        canvasBorder: '#c7d2fe',
+        labelColor: '#4338ca'
+      },
+      {
+        key: 'moto',
+        label: 'MOTO',
+        icon: '🏍️',
+        bgClass: 'bg-rose-50/90',
+        borderClass: 'border-rose-200',
+        labelClass: 'text-rose-700',
+        canvasBg: '#fff1f2',
+        canvasBorder: '#fecdd3',
+        labelColor: '#be123c'
+      }
+    ];
+
+    function getDefaultState() {
+      return {
+        date: '2026-11-22',
+        greeting: 'Boa noite, pessoal! 🙌🏼',
+        message: 'Espero que estejam todos bem. Conto com o compromisso e a parceria de todos para realizarmos uma excelente operação.',
+        volumetria: '17Mil',
+        rotas: '185',
+        carretas: ['Rodrigo', 'Yan', 'Edilson'],
+        samu: ['Idacélio', 'Wellington', 'Keven'],
+        abastecimento: {
+          '01': '',
+          '02': 'Fábio / Diarista',
+          '03': 'Flávio / Diarista',
+          '04': 'Diarista',
+          '05': 'Diarista',
+          '06': 'Diarista'
+        },
+        bancadas: {
+          '02': { dupla1A: 'Claudiana', dupla1B: '', dupla2A: 'David', dupla2B: '', sorting: '' },
+          '03': { dupla1A: 'Rodrigo', dupla1B: '', dupla2A: 'Jordão', dupla2B: '', sorting: '' },
+          '04': { dupla1A: 'Erinaldo', dupla1B: 'Willian', dupla2A: 'Edivar', dupla2B: 'Elikely', sorting: 'Vankelma' },
+          '05': { dupla1A: 'Cardoso', dupla1B: 'Wilton', dupla2A: 'Ramiro', dupla2B: 'Regis', sorting: 'Diarista' },
+          '06': { dupla1A: 'Renato', dupla1B: 'Felipe', dupla2A: 'Miguel', dupla2B: 'Alexandre', sorting: 'Diarista' }
+        },
+        apoio: {
+          '5s': 'Ana',
+          'volumoso': 'Ant. Alexandre',
+          'gaiolas': 'Helio',
+          'consertos': 'Berg',
+          'letras': '',
+          'moto': ''
+        }
+      };
+    }
+
+    function normalizeMember(m) {
+      if (m && typeof m.status === 'string') {
+        return { name: m.name, status: m.status };
+      }
+      return {
+        name: m?.name || '',
+        status: m?.away ? 'away' : 'active'
+      };
+    }
+
+    let state = loadJSON(STORAGE_KEYS.STATE, getDefaultState());
+    if (!state.abastecimento || !('01' in state.abastecimento)) {
+      state.abastecimento = { '01': '', ...(state.abastecimento || {}) };
+    }
+    if (typeof state.message !== 'string') {
+      state.message = 'Espero que estejam todos bem. Conto com o compromisso e a parceria de todos para realizarmos uma excelente operação.';
+    }
+
+    let team = loadJSON(STORAGE_KEYS.TEAM, DEFAULT_TEAM).map(normalizeMember);
+    let historyList = loadJSON(STORAGE_KEYS.HISTORY, []);
+    let lastRoles = loadJSON(STORAGE_KEYS.LAST_ROLES, {});
+    let currentTheme = localStorage.getItem(STORAGE_KEYS.THEME) || 'light';
+    let savedLogoData = localStorage.getItem(STORAGE_KEYS.LOGO_DATA) || '';
+    let activePickerTarget = null;
+    let editingMemberIndex = null;
+
+    function loadJSON(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function saveAll() {
+      localStorage.setItem(STORAGE_KEYS.STATE, JSON.stringify(state));
+      localStorage.setItem(STORAGE_KEYS.TEAM, JSON.stringify(team));
+      localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(historyList));
+      localStorage.setItem(STORAGE_KEYS.LAST_ROLES, JSON.stringify(lastRoles));
+      localStorage.setItem(STORAGE_KEYS.THEME, currentTheme);
+      if (savedLogoData) {
+        localStorage.setItem(STORAGE_KEYS.LOGO_DATA, savedLogoData);
+      }
+    }
+
+    function applyTheme(theme) {
+      currentTheme = theme;
+      document.body.classList.remove('theme-light', 'theme-dark');
+      document.body.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
+      document.getElementById('themeIcon').textContent = theme === 'dark' ? '☀️' : '🌙';
+      document.getElementById('themeLabel').textContent = theme === 'dark' ? 'Versão Clara' : 'Versão Dark';
+      saveAll();
+    }
+
+    function toggleTheme() {
+      applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    }
+
+    function renderLogoPreview() {
+      const container = document.getElementById('cardLogoContainer');
+      if (savedLogoData) {
+        container.className = 'inline-block rounded-lg overflow-hidden border border-white/50 bg-[#f36a2c]';
+        container.innerHTML = `<img src="${savedLogoData}" alt="Shopee XPRESS" class="h-11 w-auto object-contain block" />`;
+      } else {
+        container.className = 'inline-flex items-baseline gap-1 shopee-brand-orange border border-white/50 px-3 py-1 rounded-lg';
+        container.innerHTML = `
+          <span class="text-white font-normal text-base">Shopee</span>
+          <span class="text-white font-black italic text-base">XPRESS</span>
+        `;
+      }
+    }
+
+    document.getElementById('customLogoFile').addEventListener('change', (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        savedLogoData = String(reader.result || '');
+        saveAll();
+        renderLogoPreview();
+        showToast('🖼️ Logo carregada para o cartão e PNG!');
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.remove('hidden');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        el.classList.add('hidden');
+      }, 2600);
+    }
+
+    function formatShortDate(isoDate) {
+      if (!isoDate) return '22/11';
+      const parts = isoDate.split('-');
+      if (parts.length !== 3) return isoDate;
+      return `${parts[2]}/${parts[1]}`;
+    }
+
+    function formatFullDateLabel(isoDate) {
+      if (!isoDate) return '';
+      const [y, m, d] = isoDate.split('-').map(Number);
+      const dt = new Date(y, (m || 1) - 1, d || 1);
+      return dt.toLocaleDateString('pt-BR', {
+        weekday: 'long',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+    }
+
+    function getAssignedNamesSet() {
+      const set = new Set();
+      const addIfRealPerson = (val) => {
+        if (!val) return;
+        val.split('/').forEach((part) => {
+          const clean = part.trim();
+          if (!clean) return;
+          const lower = clean.toLowerCase();
+          if (lower === 'diarista' || lower === '-') return;
+          if (team.some((m) => m.name.toLowerCase() === lower)) {
+            set.add(clean);
+          }
+        });
+      };
+
+      state.carretas.forEach(addIfRealPerson);
+      state.samu.forEach(addIfRealPerson);
+      Object.values(state.abastecimento).forEach(addIfRealPerson);
+      Object.values(state.bancadas).forEach((b) => {
+        addIfRealPerson(b.dupla1A);
+        addIfRealPerson(b.dupla1B);
+        addIfRealPerson(b.dupla2A);
+        addIfRealPerson(b.dupla2B);
+        addIfRealPerson(b.sorting);
+      });
+      Object.values(state.apoio).forEach(addIfRealPerson);
+      return set;
+    }
+
+    function replacePersonInScale(oldName, newName) {
+      const replaceToken = (val) => {
+        if (!val) return val;
+        return val
+          .split('/')
+          .map((part) => {
+            const trimmed = part.trim();
+            if (trimmed.toLowerCase() === oldName.toLowerCase()) {
+              return newName;
+            }
+            return trimmed;
+          })
+          .join(' / ');
+      };
+
+      state.carretas = state.carretas.map(replaceToken);
+      state.samu = state.samu.map(replaceToken);
+      Object.keys(state.abastecimento).forEach((k) => {
+        state.abastecimento[k] = replaceToken(state.abastecimento[k]);
+      });
+      Object.keys(state.bancadas).forEach((k) => {
+        const b = state.bancadas[k];
+        b.dupla1A = replaceToken(b.dupla1A);
+        b.dupla1B = replaceToken(b.dupla1B);
+        b.dupla2A = replaceToken(b.dupla2A);
+        b.dupla2B = replaceToken(b.dupla2B);
+        b.sorting = replaceToken(b.sorting);
+      });
+      Object.keys(state.apoio).forEach((k) => {
+        state.apoio[k] = replaceToken(state.apoio[k]);
+      });
+    }
+
+    function createFieldWithPopover(value, placeholder, onChangeFn) {
+      const row = document.createElement('div');
+      row.className = 'flex items-center gap-1.5';
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = value || '';
+      input.placeholder = placeholder;
+      input.className =
+        'ui-input flex-1 min-w-0 text-xs font-medium px-2.5 py-2 rounded-lg border focus:outline-none placeholder:text-slate-400';
+
+      const applyVal = (nextVal) => {
+        input.value = nextVal;
+        onChangeFn(nextVal);
+        renderPreview();
+        updateStats();
+        saveAll();
+      };
+
+      input.addEventListener('input', (e) => applyVal(e.target.value));
+
+      const triggerBtn = document.createElement('button');
+      triggerBtn.type = 'button';
+      triggerBtn.title = 'Escolher nome ou Diarista';
+      triggerBtn.className =
+        'shrink-0 w-8 h-8 rounded-lg bg-blue-600/15 hover:bg-blue-600/25 text-blue-600 border border-blue-500/35 font-bold text-xs flex items-center justify-center cursor-pointer';
+      triggerBtn.textContent = '▾';
+
+      triggerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openPickerFor(triggerBtn, (chosen) => {
+          if (chosen === 'Diarista' && input.value.trim() && !input.value.toLowerCase().includes('diarista')) {
+            applyVal(`${input.value.trim()} / Diarista`);
+          } else {
+            applyVal(chosen);
+          }
+        });
+      });
+
+      row.appendChild(input);
+      row.appendChild(triggerBtn);
+      return row;
+    }
+
+    function openPickerFor(anchorEl, onSelect) {
+      const picker = document.getElementById('floatingPicker');
+      const search = document.getElementById('pickerSearch');
+      activePickerTarget = onSelect;
+
+      picker.classList.remove('hidden');
+      search.value = '';
+      renderPickerOptions('');
+
+      const rect = anchorEl.getBoundingClientRect();
+      const pickerW = 256;
+      const pickerH = 280;
+      let left = rect.right - pickerW;
+      if (left < 12) left = 12;
+      if (left + pickerW > window.innerWidth - 12) left = window.innerWidth - pickerW - 12;
+
+      let top = rect.bottom + 6;
+      if (top + pickerH > window.innerHeight - 12) {
+        top = Math.max(12, rect.top - pickerH - 6);
+      }
+
+      picker.style.left = `${left}px`;
+      picker.style.top = `${top}px`;
+      search.focus();
+    }
+
+    function closePicker() {
+      document.getElementById('floatingPicker').classList.add('hidden');
+      activePickerTarget = null;
+    }
+
+    function pickValue(val) {
+      if (typeof activePickerTarget === 'function') {
+        activePickerTarget(val);
+      }
+      closePicker();
+    }
+
+    function renderPickerOptions(filterText) {
+      const listEl = document.getElementById('pickerOptions');
+      const q = (filterText || '').trim().toLowerCase();
+      listEl.innerHTML = '';
+
+      const filtered = team.filter((m) => m.name.toLowerCase().includes(q));
+      if (filtered.length === 0) {
+        listEl.innerHTML = '<div class="text-xs text-muted-dynamic py-2 text-center">Nenhum nome encontrado</div>';
+        return;
+      }
+
+      filtered.forEach((m) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className =
+          'w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-semibold hover:bg-blue-600/15 hover:text-blue-600 flex items-center justify-between cursor-pointer';
+
+        let badgeHtml = '';
+        if (m.status === 'away') {
+          badgeHtml = '<span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">Folga</span>';
+        } else if (m.status === 'absent') {
+          badgeHtml = '<span class="text-[10px] px-1.5 py-0.5 rounded bg-rose-100 text-rose-800 font-bold">Falta</span>';
+        }
+
+        btn.innerHTML = `<span>${m.name}</span>${badgeHtml}`;
+        btn.onclick = () => pickValue(m.name);
+        listEl.appendChild(btn);
+      });
+    }
+
+    document.getElementById('pickerSearch').addEventListener('input', (e) => {
+      renderPickerOptions(e.target.value);
+    });
+
+    document.addEventListener('click', (e) => {
+      const picker = document.getElementById('floatingPicker');
+      if (!picker.classList.contains('hidden') && !picker.contains(e.target)) {
+        closePicker();
+      }
+    });
+
+    function renderForm() {
+      document.getElementById('dataEscalaInput').value = state.date;
+      document.getElementById('saudacaoSelect').value = state.greeting;
+      document.getElementById('mensagemInput').value = state.message;
+      document.getElementById('volumetriaInput').value = state.volumetria;
+      document.getElementById('rotasInput').value = state.rotas;
+
+      const carretasEl = document.getElementById('carretasSlots');
+      carretasEl.innerHTML = '';
+      for (let i = 0; i < 3; i++) {
+        carretasEl.appendChild(
+          createFieldWithPopover(state.carretas[i], `Carreta ${i + 1}`, (val) => {
+            state.carretas[i] = val;
+          })
+        );
+      }
+
+      const samuEl = document.getElementById('samuSlots');
+      samuEl.innerHTML = '';
+      for (let i = 0; i < 3; i++) {
+        samuEl.appendChild(
+          createFieldWithPopover(state.samu[i], `SAMU ${i + 1}`, (val) => {
+            state.samu[i] = val;
+          })
+        );
+      }
+
+      const abastEl = document.getElementById('abastecimentoSlots');
+      abastEl.innerHTML = '';
+      ABASTECIMENTO_BANCADAS.forEach((num) => {
+        const row = document.createElement('div');
+        row.className = 'ui-subcard flex items-center gap-2 p-2 rounded-xl border';
+
+        const badge = document.createElement('span');
+        badge.className = 'text-[11px] font-extrabold text-blue-600 w-24 shrink-0';
+        badge.textContent = `Bancada ${num}:`;
+
+        const field = createFieldWithPopover(
+          state.abastecimento[num],
+          'Nome ou Diarista',
+          (val) => {
+            state.abastecimento[num] = val;
+          }
+        );
+        field.classList.add('flex-1', 'min-w-0');
+
+        row.appendChild(badge);
+        row.appendChild(field);
+        abastEl.appendChild(row);
+      });
+
+      const bancadasEl = document.getElementById('bancadasContainer');
+      bancadasEl.innerHTML = '';
+      BANCADA_NUMBERS.forEach((num) => {
+        const b = state.bancadas[num];
+        const card = document.createElement('div');
+        card.className = 'ui-card rounded-2xl p-4 border space-y-2.5';
+
+        const header = document.createElement('div');
+        header.className = 'flex items-center justify-between border-b border-slate-200/30 pb-2';
+        header.innerHTML = `
+          <span class="text-xs font-black">🔹 Bancada ${num}</span>
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-600/15 text-blue-600 border border-blue-500/30">SORTING</span>
+        `;
+        card.appendChild(header);
+
+        const d1 = document.createElement('div');
+        d1.className = 'grid grid-cols-2 gap-2';
+        d1.appendChild(createFieldWithPopover(b.dupla1A, 'Pessoa 1', (v) => { b.dupla1A = v; }));
+        d1.appendChild(createFieldWithPopover(b.dupla1B, 'x Dupla 1', (v) => { b.dupla1B = v; }));
+        card.appendChild(d1);
+
+        const d2 = document.createElement('div');
+        d2.className = 'grid grid-cols-2 gap-2';
+        d2.appendChild(createFieldWithPopover(b.dupla2A, 'Pessoa 2', (v) => { b.dupla2A = v; }));
+        d2.appendChild(createFieldWithPopover(b.dupla2B, 'x Dupla 2', (v) => { b.dupla2B = v; }));
+        card.appendChild(d2);
+
+        const sortWrap = document.createElement('div');
+        sortWrap.className = 'pt-1';
+        const sortLbl = document.createElement('div');
+        sortLbl.className = 'text-[10px] font-extrabold text-blue-600 mb-1';
+        sortLbl.textContent = `🔄 SORTING — Bancada ${num}`;
+        sortWrap.appendChild(sortLbl);
+        sortWrap.appendChild(createFieldWithPopover(b.sorting, 'Sorting ou Diarista', (v) => { b.sorting = v; }));
+        card.appendChild(sortWrap);
+
+        bancadasEl.appendChild(card);
+      });
+
+      const apoioEl = document.getElementById('apoioSlots');
+      apoioEl.innerHTML = '';
+      APOIO_ITEMS.forEach((item) => {
+        const box = document.createElement('div');
+        box.className = 'ui-subcard p-3 rounded-xl border space-y-1.5';
+
+        const lbl = document.createElement('div');
+        lbl.className = 'text-[11px] font-bold';
+        lbl.textContent = `${item.icon} ${item.label}`;
+
+        box.appendChild(lbl);
+        box.appendChild(
+          createFieldWithPopover(state.apoio[item.key], 'Selecionar ou digitar', (val) => {
+            state.apoio[item.key] = val;
+          })
+        );
+        apoioEl.appendChild(box);
+      });
+
+      updateStats();
+      renderPreview();
+    }
+
+    function updateStats() {
+      const assigned = getAssignedNamesSet();
+      const activeCount = team.filter((m) => m.status === 'active').length;
+      document.getElementById('totalEscalados').textContent = assigned.size;
+      document.getElementById('totalAtivos').textContent = activeCount;
+      document.getElementById('headerDateInfo').textContent = `${formatFullDateLabel(state.date)} • Shopee XPRESS`;
+    }
+
+    function formatPair(a, b) {
+      const x = (a || '').trim();
+      const y = (b || '').trim();
+      if (x && y) return `${x} x ${y}`;
+      return x || y || '-';
+    }
+
+    function buildWhatsAppText() {
+      const shortDate = formatShortDate(state.date);
+      const carretasList = state.carretas.map((v) => v.trim()).filter(Boolean);
+      const samuList = state.samu.map((v) => v.trim()).filter(Boolean);
+      const msgText = (state.message || '').trim() || 'Espero que estejam todos bem.';
+
+      const lines = [
+        `🏆 *ESCALA DE PROCESSAMENTO  📆${shortDate}*`,
+        `${state.greeting}`,
+        `${msgText}`,
+        `👇🏻`,
+        `🎯 *VOLUMETRIA:* ${state.volumetria.trim() || '-'}`,
+        `🚛 *ROTAS:*  ${state.rotas.trim() || '-'}`,
+        `━━━━━━━━━━━━━━`,
+        `🚚 *CARRETAS*`,
+        `${carretasList.length ? carretasList.join(' / ') : '-'}`,
+        ``,
+        `🚑 *SAMU*`,
+        `${samuList.length ? samuList.join(' / ') : '-'}`,
+        `━━━━━━━━━━━━━━`,
+        `📦*ABASTECIMENTO*`,
+        `━━━━━━━━━━━━━━`
+      ];
+
+      ABASTECIMENTO_BANCADAS.forEach((num) => {
+        const val = (state.abastecimento[num] || '').trim() || '-';
+        lines.push(`*Bancada ${num}*: ${val}`);
+      });
+
+      BANCADA_NUMBERS.forEach((num) => {
+        const b = state.bancadas[num];
+        const p1 = formatPair(b.dupla1A, b.dupla1B);
+        const p2 = formatPair(b.dupla2A, b.dupla2B);
+        const sortVal = (b.sorting || '').trim() || '-';
+
+        lines.push(`━━━━━━━━━━━━━━`);
+        lines.push(` 🔹 *BANCADA* ${num.split('').map((d) => `${d}️⃣`).join('')}`);
+        lines.push(`━━━━━━━━━━━━━━`);
+        lines.push(`- ${p1}`);
+        lines.push(`- ${p2}`);
+        lines.push(``);
+        lines.push(`🔄 *SORTING — BANCADA ${num}* `);
+        lines.push(`- ${sortVal}`);
+      });
+
+      lines.push(`*======================*`);
+      lines.push(`🧹 *5s*`);
+      lines.push(`- ${(state.apoio['5s'] || '').trim() || '-'}`);
+      lines.push(``);
+      lines.push(`📦 *VOLUMOSO*`);
+      lines.push(`- ${(state.apoio['volumoso'] || '').trim() || '-'}`);
+      lines.push(``);
+      lines.push(`🛒 *PUXAR GAIOLAS*`);
+      lines.push(`- ${(state.apoio['gaiolas'] || '').trim() || '-'}`);
+      lines.push(``);
+      lines.push(`🔧 *CONCERTOS*`);
+      lines.push(`- ${(state.apoio['consertos'] || '').trim() || '-'}`);
+      lines.push(``);
+      lines.push(`🔤 *LETRAS*`);
+      lines.push(`- ${(state.apoio['letras'] || '').trim() || '-'}`);
+      lines.push(``);
+      lines.push(`🏍️ *MOTO*`);
+      lines.push(`- ${(state.apoio['moto'] || '').trim() || '-'}`);
+
+      return lines.join('\n');
+    }
+
+    function renderPreview() {
+      document.getElementById('whatsappTextOutput').value = buildWhatsAppText();
+
+      document.getElementById('cardData').textContent = formatShortDate(state.date);
+      document.getElementById('cardVolumetria').textContent = state.volumetria.trim() || '-';
+      document.getElementById('cardRotas').textContent = state.rotas.trim() || '-';
+      document.getElementById('cardSaudacao').textContent = state.greeting;
+      document.getElementById('cardMensagem').textContent =
+        (state.message || '').trim() || 'Espero que estejam todos bem.';
+
+      const cList = state.carretas.map((v) => v.trim()).filter(Boolean);
+      document.getElementById('cardCarretas').textContent = cList.length ? cList.join(' / ') : '-';
+
+      const sList = state.samu.map((v) => v.trim()).filter(Boolean);
+      document.getElementById('cardSamu').textContent = sList.length ? sList.join(' / ') : '-';
+
+      const abastPreview = document.getElementById('cardAbastecimento');
+      abastPreview.innerHTML = '';
+      ABASTECIMENTO_BANCADAS.forEach((num) => {
+        const div = document.createElement('div');
+        div.className = 'break-words';
+        div.innerHTML = `<span class="text-blue-700 font-black">Bancada ${num}:</span> <span class="font-extrabold text-slate-900">${(state.abastecimento[num] || '').trim() || '-'}</span>`;
+        abastPreview.appendChild(div);
+      });
+
+      const bancadasPreview = document.getElementById('cardBancadas');
+      bancadasPreview.innerHTML = '';
+      BANCADA_NUMBERS.forEach((num) => {
+        const b = state.bancadas[num];
+        const p1 = formatPair(b.dupla1A, b.dupla1B);
+        const p2 = formatPair(b.dupla2A, b.dupla2B);
+        const sortVal = (b.sorting || '').trim() || '-';
+
+        const box = document.createElement('div');
+        box.className = 'rounded-xl p-3 bg-white border border-slate-200 text-sm space-y-1';
+        box.innerHTML = `
+          <div class="font-black text-[#ee4d2d] text-sm">
+            <span>BANCADA ${num}</span>
+          </div>
+          <div class="text-slate-900 font-extrabold break-words">• ${p1}</div>
+          <div class="text-slate-900 font-extrabold break-words">• ${p2}</div>
+          <div class="text-blue-700 font-extrabold break-words pt-1 border-t border-slate-100 text-sm">
+            🔄 SORTING: <span class="text-slate-900 font-black">${sortVal}</span>
+          </div>
+        `;
+        bancadasPreview.appendChild(box);
+      });
+
+      const apoioPreview = document.getElementById('cardApoio');
+      apoioPreview.innerHTML = '';
+      APOIO_ITEMS.forEach((item) => {
+        const val = (state.apoio[item.key] || '').trim() || '-';
+        const mini = document.createElement('div');
+        mini.className = `rounded-xl px-2 py-2.5 ${item.bgClass} border ${item.borderClass} text-center flex flex-col items-center justify-center`;
+        mini.innerHTML = `
+          <div class="text-xs font-extrabold ${item.labelClass} break-words flex items-center justify-center gap-1">
+            <span>${item.icon}</span>
+            <span>${item.label}</span>
+          </div>
+          <div class="text-base font-black text-slate-900 break-words mt-1">${val}</div>
+        `;
+        apoioPreview.appendChild(mini);
+      });
+    }
+
+    function setPreviewMode(mode) {
+      const cardWrap = document.getElementById('cardPreviewWrapper');
+      const textWrap = document.getElementById('textPreviewWrapper');
+      const cardBtn = document.getElementById('modeCardBtn');
+      const textBtn = document.getElementById('modeTextBtn');
+
+      if (mode === 'card') {
+        cardWrap.classList.remove('hidden');
+        textWrap.classList.add('hidden');
+        cardBtn.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-[#ee4d2d] text-white cursor-pointer';
+        textBtn.className = 'px-3 py-1 rounded-lg text-xs font-bold text-muted-dynamic cursor-pointer';
+      } else {
+        cardWrap.classList.add('hidden');
+        textWrap.classList.remove('hidden');
+        textBtn.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-blue-600 text-white cursor-pointer';
+        cardBtn.className = 'px-3 py-1 rounded-lg text-xs font-bold text-muted-dynamic cursor-pointer';
+      }
+    }
+
+    function rodiziarEquipe() {
+      const activePool = team
+        .filter((m) => m.status === 'active')
+        .map((m) => m.name)
+        .sort(() => Math.random() - 0.5);
+
+      if (activePool.length === 0) {
+        showToast('Nenhum colaborador ativo para o rodízio.');
+        return;
+      }
+
+      const slotTargets = [];
+      for (let i = 0; i < 3; i++) {
+        slotTargets.push({ roleId: `carreta_${i}`, set: (v) => { state.carretas[i] = v; } });
+      }
+      for (let i = 0; i < 3; i++) {
+        slotTargets.push({ roleId: `samu_${i}`, set: (v) => { state.samu[i] = v; } });
+      }
+      BANCADA_NUMBERS.forEach((num) => {
+        const b = state.bancadas[num];
+        slotTargets.push({ roleId: `b${num}_1a`, set: (v) => { b.dupla1A = v; b.dupla1B = ''; } });
+        slotTargets.push({ roleId: `b${num}_2a`, set: (v) => { b.dupla2A = v; b.dupla2B = ''; } });
+        slotTargets.push({ roleId: `b${num}_sort`, set: (v) => { b.sorting = v; } });
+      });
+      APOIO_ITEMS.forEach((item) => {
+        slotTargets.push({ roleId: `apoio_${item.key}`, set: (v) => { state.apoio[item.key] = v; } });
+      });
+
+      const available = [...activePool];
+      const nextLastRoles = {};
+
+      slotTargets.forEach((target) => {
+        if (available.length === 0) {
+          target.set('Diarista');
+          return;
+        }
+        const idx = available.findIndex((person) => lastRoles[person] !== target.roleId);
+        const chosenIdx = idx >= 0 ? idx : 0;
+        const chosenPerson = available.splice(chosenIdx, 1)[0];
+        target.set(chosenPerson);
+        nextLastRoles[chosenPerson] = target.roleId;
+      });
+
+      lastRoles = nextLastRoles;
+      saveAll();
+      renderForm();
+      showToast('🔄 Rodízio aplicado!');
+    }
+
+    function limparEscala() {
+      state.carretas = ['', '', ''];
+      state.samu = ['', '', ''];
+      ABASTECIMENTO_BANCADAS.forEach((num) => {
+        state.abastecimento[num] = '';
+      });
+      BANCADA_NUMBERS.forEach((num) => {
+        state.bancadas[num] = { dupla1A: '', dupla1B: '', dupla2A: '', dupla2B: '', sorting: '' };
+      });
+      APOIO_ITEMS.forEach((item) => {
+        state.apoio[item.key] = '';
+      });
+      saveAll();
+      renderForm();
+      showToast('Campos limpos.');
+    }
+
+    async function enviarWhatsApp() {
+      const text = buildWhatsAppText();
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast('✅ Texto copiado! Abrindo WhatsApp...');
+      } catch {
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        showToast('✅ Texto copiado! Abrindo WhatsApp...');
+      }
+
+      setTimeout(() => {
+        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+      }, 350);
+    }
+
+    function roundRectPath(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    function drawWrappedLines(ctx, text, x, y, maxWidth, lineHeight) {
+      const words = String(text || '-').split(/\s+/);
+      let line = '';
+      let curY = y;
+      for (let i = 0; i < words.length; i++) {
+        const testLine = line ? `${line} ${words[i]}` : words[i];
+        if (ctx.measureText(testLine).width > maxWidth && line) {
+          ctx.fillText(line, x, curY);
+          line = words[i];
+          curY += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      if (line) {
+        ctx.fillText(line, x, curY);
+        curY += lineHeight;
+      }
+      return curY;
+    }
+
+    function loadImageElement(src) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => resolve(null);
+        img.src = src;
+      });
+    }
+
+    function drawEmoji(ctx, emoji, x, y, size = 18) {
+      ctx.save();
+      ctx.font = `${size}px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif`;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(emoji, x, y);
+      ctx.restore();
+    }
+
+    async function baixarImagemPNG() {
+      showToast('🖼️ Gerando imagem PNG com todos os ícones...');
+      const W = 760;
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      const headerH = 252;
+      const topCardsH = 108;
+      const abastH = 166;
+      const bancadaRowH = 146;
+      const bancadaRows = 3;
+      const apoioH = 204;
+      const totalH = headerH + topCardsH + abastH + (bancadaRows * bancadaRowH) + apoioH + 40;
+
+      canvas.width = W;
+      canvas.height = totalH;
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, W, totalH);
+
+      const grad = ctx.createLinearGradient(0, 0, W, headerH);
+      grad.addColorStop(0, '#c22b0e');
+      grad.addColorStop(0.42, '#ee4d2d');
+      grad.addColorStop(0.78, '#ff7a33');
+      grad.addColorStop(1, '#ffb347');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, headerH);
+
+      let drewCustomLogo = false;
+      if (savedLogoData) {
+        const loadedImg = await loadImageElement(savedLogoData);
+        if (loadedImg) {
+          roundRectPath(ctx, 24, 16, 232, 56, 10);
+          ctx.fillStyle = '#f36a2c';
+          ctx.fill();
+          ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.drawImage(loadedImg, 28, 20, 224, 48);
+          drewCustomLogo = true;
+        }
+      }
+
+      if (!drewCustomLogo) {
+        roundRectPath(ctx, 24, 16, 232, 52, 10);
+        ctx.fillStyle = '#f36a2c';
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,0.65)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '500 25px Inter, Arial, sans-serif';
+        ctx.fillText('Shopee', 36, 51);
+        ctx.font = 'italic 900 25px Inter, Arial, sans-serif';
+        ctx.fillText('XPRESS', 128, 51);
+        ctx.fillRect(166, 23, 72, 4);
+      }
+
+      roundRectPath(ctx, W - 166, 16, 142, 78, 14);
+      ctx.fillStyle = '#172554';
+      ctx.fill();
+      ctx.strokeStyle = '#7dd3fc';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      drawEmoji(ctx, '📅', W - 132, 38, 16);
+      ctx.fillStyle = '#7dd3fc';
+      ctx.font = '800 14px Inter, Arial, sans-serif';
+      ctx.fillText('DATA', W - 108, 43);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 32px Inter, Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(formatShortDate(state.date), W - 95, 81);
+      ctx.textAlign = 'left';
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 26px Inter, Arial, sans-serif';
+      ctx.fillText('ESCALA DE PROCESSAMENTO', 24, 103);
+
+      ctx.font = '700 18px Inter, Arial, sans-serif';
+      ctx.fillText(state.greeting || 'Boa noite, pessoal!', 24, 130);
+
+      ctx.font = '500 14px Inter, Arial, sans-serif';
+      ctx.fillStyle = '#fff7ed';
+      drawWrappedLines(ctx, state.message || '', 24, 152, W - 204, 18);
+
+      roundRectPath(ctx, 24, 190, 346, 48, 12);
+      ctx.fillStyle = '#172554';
+      ctx.fill();
+      ctx.strokeStyle = '#7dd3fc';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      drawEmoji(ctx, '🎯', 38, 214, 18);
+      ctx.fillStyle = '#7dd3fc';
+      ctx.font = '800 15px Inter, Arial, sans-serif';
+      ctx.fillText('VOLUMETRIA', 64, 219);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 22px Inter, Arial, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(state.volumetria.trim() || '-', 354, 221);
+      ctx.textAlign = 'left';
+
+      roundRectPath(ctx, 390, 190, 346, 48, 12);
+      ctx.fillStyle = '#172554';
+      ctx.fill();
+      ctx.strokeStyle = '#7dd3fc';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      drawEmoji(ctx, '🚛', 404, 214, 18);
+      ctx.fillStyle = '#7dd3fc';
+      ctx.font = '800 15px Inter, Arial, sans-serif';
+      ctx.fillText('ROTAS', 430, 219);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 22px Inter, Arial, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(state.rotas.trim() || '-', 720, 221);
+      ctx.textAlign = 'left';
+
+      let curY = headerH + 10;
+
+      const carretasText = state.carretas.map((v) => v.trim()).filter(Boolean).join(' / ') || '-';
+      const samuText = state.samu.map((v) => v.trim()).filter(Boolean).join(' / ') || '-';
+
+      roundRectPath(ctx, 24, curY, 346, topCardsH - 10, 12);
+      ctx.fillStyle = '#fff7ed';
+      ctx.fill();
+      ctx.strokeStyle = '#fdba74';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      drawEmoji(ctx, '🚚', 38, curY + 24, 18);
+      ctx.fillStyle = '#ee4d2d';
+      ctx.font = '900 15px Inter, Arial, sans-serif';
+      ctx.fillText('CARRETAS', 64, curY + 29);
+      ctx.fillStyle = '#0f172a';
+      ctx.font = '800 17px Inter, Arial, sans-serif';
+      drawWrappedLines(ctx, carretasText, 38, curY + 56, 318, 21);
+
+      roundRectPath(ctx, 390, curY, 346, topCardsH - 10, 12);
+      ctx.fillStyle = '#eff6ff';
+      ctx.fill();
+      ctx.strokeStyle = '#93c5fd';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      drawEmoji(ctx, '🚑', 404, curY + 24, 18);
+      ctx.fillStyle = '#1d4ed8';
+      ctx.font = '900 15px Inter, Arial, sans-serif';
+      ctx.fillText('SAMU', 430, curY + 29);
+      ctx.fillStyle = '#0f172a';
+      ctx.font = '800 17px Inter, Arial, sans-serif';
+      drawWrappedLines(ctx, samuText, 404, curY + 56, 318, 21);
+
+      curY += topCardsH;
+
+      roundRectPath(ctx, 24, curY, W - 48, abastH - 10, 14);
+      ctx.fillStyle = '#f8fafc';
+      ctx.fill();
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      drawEmoji(ctx, '📦', 38, curY + 25, 18);
+      ctx.fillStyle = '#1d4ed8';
+      ctx.font = '900 16px Inter, Arial, sans-serif';
+      ctx.fillText('ABASTECIMENTO', 64, curY + 30);
+
+      roundRectPath(ctx, W - 160, curY + 12, 120, 24, 6);
+      ctx.fillStyle = '#2563eb';
+      ctx.fill();
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 12px Inter, Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Bancada 01–06', W - 100, curY + 28);
+      ctx.textAlign = 'left';
+
+      ABASTECIMENTO_BANCADAS.forEach((num, idx) => {
+        const col = idx % 2;
+        const row = Math.floor(idx / 2);
+        const bx = col === 0 ? 38 : 390;
+        const by = curY + 60 + (row * 30);
+        const val = (state.abastecimento[num] || '').trim() || '-';
+
+        ctx.fillStyle = '#1d4ed8';
+        ctx.font = '800 17px Inter, Arial, sans-serif';
+        ctx.fillText(`Bancada ${num}:`, bx, by);
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = '800 17px Inter, Arial, sans-serif';
+        ctx.fillText(val, bx + 112, by);
+      });
+
+      curY += abastH;
+
+      BANCADA_NUMBERS.forEach((num, idx) => {
+        const col = idx % 2;
+        const row = Math.floor(idx / 2);
+        const bx = col === 0 ? 24 : 390;
+        const bw = 346;
+        const by = curY + (row * bancadaRowH);
+        const bh = bancadaRowH - 10;
+
+        const b = state.bancadas[num];
+        const p1 = formatPair(b.dupla1A, b.dupla1B);
+        const p2 = formatPair(b.dupla2A, b.dupla2B);
+        const sortVal = (b.sorting || '').trim() || '-';
+
+        roundRectPath(ctx, bx, by, bw, bh, 14);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = '#ee4d2d';
+        ctx.font = '900 17px Inter, Arial, sans-serif';
+        ctx.fillText(`BANCADA ${num}`, bx + 16, by + 27);
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = '800 16px Inter, Arial, sans-serif';
+        ctx.fillText(`• ${p1}`, bx + 16, by + 53);
+        ctx.fillText(`• ${p2}`, bx + 16, by + 77);
+
+        drawEmoji(ctx, '🔄', bx + 16, by + 106, 16);
+        ctx.font = '900 16px Inter, Arial, sans-serif';
+        ctx.fillStyle = '#1d4ed8';
+        const sortPrefix = 'SORTING: ';
+        ctx.fillText(sortPrefix, bx + 38, by + 111);
+        const prefixW = ctx.measureText(sortPrefix).width;
+        ctx.fillStyle = '#0f172a';
+        ctx.fillText(sortVal, bx + 38 + prefixW, by + 111);
+      });
+
+      curY += bancadaRows * bancadaRowH;
+
+      APOIO_ITEMS.forEach((item, idx) => {
+        const col = idx % 3;
+        const row = Math.floor(idx / 3);
+        const cardW = 228;
+        const cardH = 84;
+        const ax = 24 + (col * 242);
+        const ay = curY + (row * 94);
+        const val = (state.apoio[item.key] || '').trim() || '-';
+
+        roundRectPath(ctx, ax, ay, cardW, cardH, 12);
+        ctx.fillStyle = item.canvasBg;
+        ctx.fill();
+        ctx.strokeStyle = item.canvasBorder;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.font = '800 13px Inter, Arial, sans-serif';
+        const titleWidth = ctx.measureText(item.label).width;
+        const iconX = ax + (cardW / 2) - (titleWidth / 2) - 24;
+        drawEmoji(ctx, item.icon, iconX, ay + 25, 16);
+
+        ctx.fillStyle = item.labelColor;
+        ctx.textAlign = 'center';
+        ctx.fillText(item.label, ax + (cardW / 2) + 8, ay + 29);
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = '900 19px Inter, Arial, sans-serif';
+        ctx.fillText(val, ax + (cardW / 2), ay + 61);
+        ctx.textAlign = 'left';
+      });
+
+      const link = document.createElement('a');
+      link.download = `escala-shopee-xpress-${formatShortDate(state.date).replace('/', '-')}.png`;
+      link.href = canvas.toDataURL('image/png', 1.0);
+      link.click();
+      showToast('✅ Imagem PNG gerada com todos os ícones!');
+    }
+
+    function salvarEscalaNoHistorico() {
+      const entry = {
+        id: Date.now(),
+        savedAt: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+        date: state.date,
+        volumetria: state.volumetria,
+        rotas: state.rotas,
+        snapshot: JSON.parse(JSON.stringify(state))
+      };
+      historyList.unshift(entry);
+      historyList = historyList.slice(0, 30);
+      saveAll();
+      renderHistorico();
+      showToast('💾 Escala salva no histórico!');
+    }
+
+    function carregarDoHistorico(id) {
+      const item = historyList.find((h) => h.id === id);
+      if (!item) return;
+      state = JSON.parse(JSON.stringify(item.snapshot));
+      saveAll();
+      renderForm();
+      switchTab('escala');
+      showToast(`Escala de ${formatShortDate(item.date)} carregada!`);
+    }
+
+    function limparHistorico() {
+      historyList = [];
+      saveAll();
+      renderHistorico();
+      showToast('Histórico apagado.');
+    }
+
+    function renderHistorico() {
+      document.getElementById('historicoCount').textContent = historyList.length;
+      const container = document.getElementById('historicoContainer');
+      container.innerHTML = '';
+
+      if (historyList.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full ui-card rounded-2xl p-8 text-center text-muted-dynamic text-sm border">
+            Nenhuma escala salva ainda.
+          </div>
+        `;
+        return;
+      }
+
+      historyList.forEach((h) => {
+        const card = document.createElement('div');
+        card.className = 'ui-card rounded-2xl p-4 border flex flex-col justify-between gap-3';
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-black text-[#ee4d2d]">📆 ${formatShortDate(h.date)}</span>
+              <span class="text-[11px] text-muted-dynamic">Salvo às ${h.savedAt}</span>
+            </div>
+            <div class="text-xs text-blue-600 font-bold mt-1">
+              🎯 Volumetria: ${h.volumetria || '-'} • 🚛 Rotas: ${h.rotas || '-'}
+            </div>
+          </div>
+          <button
+            type="button"
+            onclick="carregarDoHistorico(${h.id})"
+            class="w-full py-2 rounded-xl text-xs font-bold bg-blue-600/15 hover:bg-blue-600/25 text-blue-600 border border-blue-500/30 transition cursor-pointer"
+          >
+            Carregar na Escala
+          </button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openEditMemberModal(idx) {
+      const member = team[idx];
+      if (!member) return;
+      editingMemberIndex = idx;
+      document.getElementById('editMemberNameInput').value = member.name;
+      document.getElementById('editMemberStatusSelect').value = member.status || 'active';
+      document.getElementById('editMemberModal').classList.remove('hidden');
+      document.getElementById('editMemberNameInput').focus();
+    }
+
+    function closeEditMemberModal() {
+      editingMemberIndex = null;
+      document.getElementById('editMemberModal').classList.add('hidden');
+    }
+
+    document.getElementById('editMemberForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (editingMemberIndex === null || !team[editingMemberIndex]) return;
+
+      const inputEl = document.getElementById('editMemberNameInput');
+      const statusEl = document.getElementById('editMemberStatusSelect');
+      const nextName = inputEl.value.trim();
+      const nextStatus = statusEl.value;
+
+      if (!nextName) {
+        showToast('Digite um nome válido.');
+        return;
+      }
+
+      const duplicate = team.some(
+        (m, i) => i !== editingMemberIndex && m.name.toLowerCase() === nextName.toLowerCase()
+      );
+      if (duplicate) {
+        showToast('Já existe outro colaborador com esse nome.');
+        return;
+      }
+
+      const oldName = team[editingMemberIndex].name;
+      team[editingMemberIndex].name = nextName;
+      team[editingMemberIndex].status = nextStatus;
+
+      if (oldName !== nextName) {
+        replacePersonInScale(oldName, nextName);
+        renderForm();
+      }
+
+      saveAll();
+      renderEquipe();
+      updateStats();
+      closeEditMemberModal();
+      showToast(`✏️ ${nextName} atualizado!`);
+    });
+
+    function renderEquipe() {
+      const activeCount = team.filter((m) => m.status === 'active').length;
+      const awayCount = team.filter((m) => m.status === 'away').length;
+      const absentCount = team.filter((m) => m.status === 'absent').length;
+
+      document.getElementById('teamTotalCount').textContent = team.length;
+      document.getElementById('teamActiveCount').textContent = activeCount;
+      document.getElementById('teamAwayCount').textContent = awayCount;
+      document.getElementById('teamAbsentCount').textContent = absentCount;
+
+      const container = document.getElementById('teamListContainer');
+      container.innerHTML = '';
+
+      team.forEach((member, idx) => {
+        const cardStyle =
+          member.status === 'away'
+            ? 'bg-amber-500/15 border-amber-500/40'
+            : member.status === 'absent'
+            ? 'bg-rose-500/15 border-rose-500/40'
+            : 'ui-subcard';
+
+        const item = document.createElement('div');
+        item.className = `rounded-xl p-3 border flex items-center justify-between gap-2 ${cardStyle}`;
+
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'text-sm font-bold truncate';
+        nameSpan.textContent = member.name;
+
+        const actions = document.createElement('div');
+        actions.className = 'flex items-center gap-1 shrink-0';
+
+        const statusSelect = document.createElement('select');
+        statusSelect.title = 'Status do colaborador';
+        statusSelect.className =
+          'ui-input text-[11px] font-bold px-2 py-1 rounded-lg border focus:outline-none cursor-pointer';
+        statusSelect.innerHTML = `
+          <option value="active" ${member.status === 'active' ? 'selected' : ''}>Ativo</option>
+          <option value="away" ${member.status === 'away' ? 'selected' : ''}>Folga</option>
+          <option value="absent" ${member.status === 'absent' ? 'selected' : ''}>Falta</option>
+        `;
+        statusSelect.onchange = (e) => {
+          team[idx].status = e.target.value;
+          saveAll();
+          renderEquipe();
+          updateStats();
+        };
+
+        const editBtn = document.createElement('button');
+        editBtn.type = 'button';
+        editBtn.title = 'Editar colaborador';
+        editBtn.className =
+          'px-2 py-1 rounded-lg text-xs bg-blue-600/15 hover:bg-blue-600/25 text-blue-600 font-bold cursor-pointer';
+        editBtn.textContent = '✏️';
+        editBtn.onclick = () => openEditMemberModal(idx);
+
+        const delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.title = 'Remover colaborador';
+        delBtn.className = 'px-2 py-1 rounded-lg text-xs text-muted-dynamic hover:text-rose-600 cursor-pointer';
+        delBtn.textContent = '✕';
+        delBtn.onclick = () => {
+          team.splice(idx, 1);
+          saveAll();
+          renderEquipe();
+          updateStats();
+        };
+
+        actions.appendChild(statusSelect);
+        actions.appendChild(editBtn);
+        actions.appendChild(delBtn);
+
+        item.appendChild(nameSpan);
+        item.appendChild(actions);
+        container.appendChild(item);
+      });
+    }
+
+    function switchTab(tabName) {
+      ['escala', 'equipe', 'historico'].forEach((t) => {
+        document.getElementById(`view-${t}`).classList.toggle('hidden', t !== tabName);
+        const btn = document.getElementById(`tab-${t}`);
+        if (t === tabName) {
+          btn.className =
+            'tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold border-b-2 border-[#ee4d2d] text-[#ee4d2d] whitespace-nowrap cursor-pointer';
+        } else {
+          btn.className =
+            'tab-btn px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 border-transparent text-muted-dynamic whitespace-nowrap cursor-pointer';
+        }
+      });
+    }
+
+    document.getElementById('dataEscalaInput').addEventListener('change', (e) => {
+      state.date = e.target.value;
+      saveAll();
+      renderPreview();
+      updateStats();
+    });
+
+    document.getElementById('saudacaoSelect').addEventListener('change', (e) => {
+      state.greeting = e.target.value;
+      saveAll();
+      renderPreview();
+    });
+
+    document.getElementById('mensagemInput').addEventListener('input', (e) => {
+      state.message = e.target.value;
+      saveAll();
+      renderPreview();
+    });
+
+    document.getElementById('volumetriaInput').addEventListener('input', (e) => {
+      state.volumetria = e.target.value;
+      saveAll();
+      renderPreview();
+    });
+
+    document.getElementById('rotasInput').addEventListener('input', (e) => {
+      state.rotas = e.target.value;
+      saveAll();
+      renderPreview();
+    });
+
+    document.getElementById('addMemberForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = document.getElementById('newMemberName');
+      const name = input.value.trim();
+      if (!name) return;
+      if (team.some((m) => m.name.toLowerCase() === name.toLowerCase())) {
+        showToast('Esse colaborador já está na lista.');
+        return;
+      }
+      team.push({ name, status: 'active' });
+      input.value = '';
+      saveAll();
+      renderEquipe();
+      updateStats();
+      showToast(`${name} adicionado!`);
+    });
+
+    document.getElementById('bulkMemberForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const textarea = document.getElementById('bulkMemberInput');
+      const lines = textarea.value
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean);
+
+      if (lines.length === 0) {
+        showToast('Cole pelo menos um nome por linha.');
+        return;
+      }
+
+      let addedCount = 0;
+      let skippedCount = 0;
+
+      lines.forEach((rawName) => {
+        const exists = team.some((m) => m.name.toLowerCase() === rawName.toLowerCase());
+        if (exists) {
+          skippedCount++;
+        } else {
+          team.push({ name: rawName, status: 'active' });
+          addedCount++;
+        }
+      });
+
+      textarea.value = '';
+      saveAll();
+      renderEquipe();
+      updateStats();
+
+      if (addedCount > 0 && skippedCount > 0) {
+        showToast(`✅ ${addedCount} adicionados (${skippedCount} já existiam).`);
+      } else if (addedCount > 0) {
+        showToast(`✅ ${addedCount} colaboradores importados!`);
+      } else {
+        showToast('Todos os nomes da lista já estavam cadastrados.');
+      }
+    });
+
+    applyTheme(currentTheme);
+    renderLogoPreview();
+    renderForm();
+    renderEquipe();
+    renderHistorico();
+  </script>
+</body>
+</html>
